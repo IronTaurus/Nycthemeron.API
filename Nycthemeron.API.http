@@ -1,0 +1,6 @@
+@Nycthemeron.API_HostAddress = http://localhost:5297
+
+GET {{Nycthemeron.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
