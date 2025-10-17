@@ -1,0 +1,6 @@
+﻿# Ignore build output
+bin/
+obj/
+**/bin/
+**/obj/
+**/Debug/net8.0/
