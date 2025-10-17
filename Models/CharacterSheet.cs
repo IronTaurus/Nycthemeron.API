@@ -31,7 +31,7 @@ namespace Nycthemeron.API.Models
         public User User { get; set; } = null!;
         public Inventory Inventory { get; set; } = new();
         public List<Talent> Talents { get; set; } = new();
-        public List<Card>? Cards { get; set; } = new();
+        public List<Card> Cards { get; set; } = new();
 
     }
 }

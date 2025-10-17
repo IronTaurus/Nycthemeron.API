@@ -20,9 +20,11 @@ namespace Nycthemeron.API.Models
         public CharacterAttributeDto Presence { get; set; } = new();
         public List<TalentDto> Talents { get; set; } = new();
         public List<CardDto> Cards { get; set; } = new();
+        public InventoryDto Inventory { get; set; } = new();
 
         [JsonIgnore]
         public List<CharacterAttributeDto> Attributes => new() { Agility, Body, Mind, Mystic, Presence };
+
     }
     
         public class CharacterSheetCreateDto
@@ -33,6 +35,8 @@ namespace Nycthemeron.API.Models
         public CharacterAttributeDto Mind { get; set; }
         public CharacterAttributeDto Mystic { get; set; }
         public CharacterAttributeDto Presence { get; set; }
+
+        
 
         public int BaseArmor { get; set; }
         public int CurrentArmor { get; set; }
