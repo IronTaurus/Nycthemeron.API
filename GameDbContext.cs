@@ -111,30 +111,16 @@ public class GameDbContext : DbContext
 
         // Inventory → Items
         modelBuilder.Entity<Inventory>()
-            .HasMany(i => i.Weapons)
-            .WithOne(w => w.Inventory)
-            .HasForeignKey(w => w.InventoryId);
-
-        modelBuilder.Entity<Inventory>()
-            .HasMany(i => i.Armors)
-            .WithOne(a => a.Inventory)
-            .HasForeignKey(a => a.InventoryId);
-
-        modelBuilder.Entity<Inventory>()
-            .HasMany(i => i.Others)
-            .WithOne(o => o.Inventory)
-            .HasForeignKey(o => o.InventoryId);
+            .HasMany(i => i.Items)
+            .WithOne(i => i.Inventory)
+            .HasForeignKey(i => i.InventoryId)
+            .OnDelete(DeleteBehavior.SetNull);
 
         modelBuilder.Entity<Container>()
             .HasMany(c => c.ContainingItems)
             .WithOne(i => i.Container)
             .HasForeignKey(i => i.ContainerId)
             .OnDelete(DeleteBehavior.SetNull);
-
-        modelBuilder.Entity<Inventory>()
-            .HasMany(i => i.Accessories)
-            .WithOne(a => a.Inventory)
-            .HasForeignKey(a => a.InventoryId);
 
         modelBuilder.Entity<Item>()
             .HasDiscriminator<string>("ItemType")

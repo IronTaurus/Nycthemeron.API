@@ -34,7 +34,7 @@ public static class DbInitializer
         var ranged = new GetWeapons().Ranged();
         var magic = new GetWeapons().Magic();
 
-        var weapons =
+        var globalWeapons =
         melee
         .Concat(ranged)
         .Concat(magic)
@@ -59,7 +59,7 @@ public static class DbInitializer
 
 
         context.Talents.AddRange(talents);
-        context.Items.AddRange(weapons);
+        context.Items.AddRange(globalWeapons);
         context.SaveChanges();
     }
     

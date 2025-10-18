@@ -11,9 +11,10 @@ public abstract class Item
 
     [Required]
     public string Title { get; set; } = null!;
+    public int Weight { get; set; }   
     public string? Notes { get; set; }
-    public int InventoryId { get; set; }
-    public Inventory Inventory { get; set; } = null!;
+    public int? InventoryId { get; set; }
+    public Inventory? Inventory { get; set; }
 
     // Optional container reference
     public int? ContainerId { get; set; }

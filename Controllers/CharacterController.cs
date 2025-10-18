@@ -184,7 +184,7 @@ namespace Nycthemeron.API.Controllers
             if (user == null)
                 return Unauthorized("User not found");
 
-
+            var inventory = new Inventory();
             // Create a character with the default attributes
             var character = new CharacterSheet
             {
@@ -201,7 +201,9 @@ namespace Nycthemeron.API.Controllers
                 Mind = new CharacterAttribute { Title = "Mind", Value = 0, Aspiration = 0 },
                 Mystic = new CharacterAttribute { Title = "Mystic", Value = 0, Aspiration = 0 },
                 Presence = new CharacterAttribute { Title = "Presence", Value = 0, Aspiration = 0 },
+                Inventory = inventory
             };
+            inventory.CharacterSheet = character;
 
             _context.CharacterSheets.Add(character);
             await _context.SaveChangesAsync();
@@ -228,8 +230,13 @@ namespace Nycthemeron.API.Controllers
                 Mind = ToDto(character.Mind),
                 Mystic = ToDto(character.Mystic),
                 Presence = ToDto(character.Presence),
-                Talents = new List<TalentDto>(), // empty initially
-                Cards = new List<CardDto>()      // empty initially
+                Talents = new List<TalentDto>(),
+                Cards = new List<CardDto>(),
+                Inventory = new InventoryDto
+                {
+                    Id = inventory.Id,
+                    Items = new List<ItemDto>()
+                }
             });
         }
     }

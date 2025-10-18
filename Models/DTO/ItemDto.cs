@@ -4,8 +4,8 @@ public abstract class ItemDto
 {
     public int Id { get; set; }
     public string Title { get; set; } = null!;
+    public int Weight { get; set; }
     public string? Notes { get; set; }
-
     public bool IsEquipped { get; set; }
     public EquippedSlot EquippedSlot { get; set; }
 
