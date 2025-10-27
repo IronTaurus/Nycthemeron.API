@@ -21,26 +21,35 @@ namespace Nycthemeron.API.Controllers
             _context = context;
         }
 
-        [Authorize]
-        [HttpGet("GetCharacters")]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<CharacterSheetDto>>> GetCharacters()
         {
             try
             {
                 System.Console.WriteLine("´Starting fetching Characters...");
-                System.Console.WriteLine("Getting user ID...");
+                System.Console.WriteLine("Getting user ID...");             
                 var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
                 if (userId == 0)
                     return Unauthorized("Invalid user token");
 
-                System.Console.WriteLine("Fetching Characters...");
-                var characters = await _context.CharacterSheets
-                        .Where(c => c.UserId == userId)
-                        .Include(c => c.Cards)
-                        .Include(c => c.Talents)
-                        .Include(c => c.Inventory.Items)
-                        .ToListAsync();
+                // Check if the logged-in user is an Admin
+                var isAdmin = User.IsInRole("Admin");
 
+                System.Console.WriteLine(isAdmin
+                    ? "Admin access granted — fetching all characters..."
+                    : $"User access granted — fetching characters for user ID: {userId}");
+
+                var charactersQuery = _context.CharacterSheets
+                    .Include(c => c.Cards)
+                    .Include(c => c.Talents)
+                    .Include(c => c.Inventory)
+                        .ThenInclude(i => i.Items);
+
+                var characters = isAdmin
+                    ? await charactersQuery.ToListAsync() // Admin gets full access
+                    : await charactersQuery.Where(c => c.UserId == userId).ToListAsync();
+
+                System.Console.WriteLine("Fetching Characters...");
                 CharacterAttributeDto ToDto(CharacterAttribute attr)
                 {
                     return new CharacterAttributeDto
@@ -124,6 +133,12 @@ namespace Nycthemeron.API.Controllers
                 {
                     Id = c.Id,
                     Name = c.Name,
+                    Age = c.Age,
+                    Race = c.Race,
+                    Sex = c.Sex,
+                    MaxHitpoints = c.MaxHitpoints,
+                    CurrentHitpoints = c.CurrentHitpoints,
+                    TempHitpoints = c.TempHitpoints,
                     BaseArmor = c.BaseArmor,
                     CurrentArmor = c.CurrentArmor,
                     MagicalArmor = c.MagicalArmor,
@@ -145,7 +160,22 @@ namespace Nycthemeron.API.Controllers
                     Cards = c.Cards?.Select(card => new CardDto
                     {
                         Id = card.Id,
-                        Title = card.Title
+                        MainClass = card.MainClass,
+                        SubClass = card.SubClass,
+                        Tier = card.Tier,
+                        Charges = card.Charges,
+                        SunTitle = card.SunTitle,
+                        SunAbilityType = card.SunAbilityType,
+                        SunActionTypes = card.SunActionTypes,
+                        SunRequirements = card.SunRequirements,
+                        SunRuleText = card.SunRuleText,
+                        SunSpiritCost = card.SunSpiritCost,
+                        MoonTitle = card.MoonTitle,
+                        MoonAbilityType = card.MoonAbilityType,
+                        MoonActionTypes = card.MoonActionTypes,
+                        MoonRequirements = card.MoonRequirements,
+                        MoonRuleText = card.MoonRuleText,
+                        MoonSpiritCost = card.MoonSpiritCost
                         // add other card properties here
                     }).ToList() ?? new List<CardDto>(),
                     Inventory = new InventoryDto
@@ -167,7 +197,6 @@ namespace Nycthemeron.API.Controllers
             }
         }
 
-        [Authorize]
         [HttpPost("create")]
         public async Task<ActionResult<CharacterSheetDto>> CreateCharacter([FromBody] CharacterSheetCreateDto dto)
         {
@@ -185,11 +214,18 @@ namespace Nycthemeron.API.Controllers
                 return Unauthorized("User not found");
 
             var inventory = new Inventory();
-            // Create a character with the default attributes
+
+            // Create a character with default attributes
             var character = new CharacterSheet
             {
                 UserId = userId,
                 Name = dto.Name,
+                Age = dto.Age,
+                Race = dto.Race,
+                Sex = dto.Sex,
+                MaxHitpoints = dto.MaxHitpoints,
+                CurrentHitpoints = dto.CurrentHitpoints,
+                TempHitpoints = dto.TempHitpoints,
                 BaseArmor = dto.BaseArmor,
                 CurrentArmor = dto.CurrentArmor,
                 MagicalArmor = dto.MagicalArmor,
@@ -219,6 +255,12 @@ namespace Nycthemeron.API.Controllers
             {
                 Id = character.Id,
                 Name = character.Name,
+                Age = character.Age,
+                Race = character.Race,
+                Sex = character.Sex,
+                MaxHitpoints = character.MaxHitpoints,
+                CurrentHitpoints = character.CurrentHitpoints,
+                TempHitpoints = character.TempHitpoints,
                 BaseArmor = character.BaseArmor,
                 CurrentArmor = character.CurrentArmor,
                 MagicalArmor = character.MagicalArmor,

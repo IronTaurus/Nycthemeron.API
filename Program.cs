@@ -39,7 +39,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<GameDbContext>();
-    DbInitializer.Initialize(db);
+    // DbInitializer.Initialize(db);
 }
 
 app.UseCors();

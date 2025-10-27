@@ -6,11 +6,21 @@ namespace Nycthemeron.API.Models
     {
         public int Id { get; set; }  // CharacterSheet Id
         public string? Name { get; set; }
+        public int MaxHitpoints { get; set; }
+        public int CurrentHitpoints { get; set; }
+        public int TempHitpoints { get; set; }
         public int BaseArmor { get; set; }
         public int CurrentArmor { get; set; }
         public int MagicalArmor { get; set; }
         public int BaseSpirit { get; set; }
         public int CurrentSpirit { get; set; }
+        public int Movement { get; set; }
+        public int Initiative { get; set; }    
+
+        public string? Race { get; set; }
+        public string? Sex { get; set; }
+        public string? Age { get; set; }
+           
         public int TalentPoints { get; set; }
 
         public CharacterAttributeDto Agility { get; set; } = new();
@@ -30,14 +40,19 @@ namespace Nycthemeron.API.Models
         public class CharacterSheetCreateDto
     {
         public string? Name { get; set; }
+        public string? Race { get; set; }
+        public string? Sex { get; set; }
+        public string? Age { get; set; }
         public CharacterAttributeDto Agility { get; set; }
         public CharacterAttributeDto Body { get; set; }
         public CharacterAttributeDto Mind { get; set; }
         public CharacterAttributeDto Mystic { get; set; }
         public CharacterAttributeDto Presence { get; set; }
 
-        
 
+        public int MaxHitpoints { get; set; }
+        public int CurrentHitpoints { get; set; }
+        public int TempHitpoints { get; set; }
         public int BaseArmor { get; set; }
         public int CurrentArmor { get; set; }
         public int MagicalArmor { get; set; }

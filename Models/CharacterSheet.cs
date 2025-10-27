@@ -17,14 +17,23 @@ namespace Nycthemeron.API.Models
         public CharacterAttribute Mystic { get; set; }  = new() {Title = "Mystic", Value = 0, Aspiration = 0};
 
         public int PresenceId { get; set; }
-        public CharacterAttribute Presence { get; set; }  = new() {Title = "Presence", Value = 0, Aspiration = 0};
+        public CharacterAttribute Presence { get; set; } = new() { Title = "Presence", Value = 0, Aspiration = 0 };
 
+        public int MaxHitpoints { get; set; }
+        public int CurrentHitpoints { get; set; }
+        public int TempHitpoints { get; set; }
         public int BaseArmor { get; set; }
         public int CurrentArmor { get; set; }
         public int MagicalArmor { get; set; }
         public int BaseSpirit { get; set; }
         public int CurrentSpirit { get; set; }
+        public int Movement { get; set; }
+        public int Initiative { get; set; }
         public int TalentPoints { get; set; }
+        //BIO
+        public string? Race { get; set; }
+        public string? Sex { get; set; }
+        public string? Age { get; set; }
 
         // Relations
         public int UserId { get; set; }

@@ -53,9 +53,11 @@ namespace Nycthemeron.API.Controllers
         }
 
          [HttpPost("login")]
-        public async Task<ActionResult<object>> Login(UserRegisterDto dto)
+        public async Task<ActionResult<LoginResponseDto>> Login(UserLoginDto dto)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == dto.UserName);
+            var user = await _context.Users
+            .Include(u => u.Characters)
+            .FirstOrDefaultAsync(u => u.UserName == dto.UserName);
             if (user == null)
                 return Unauthorized("User not found.");
 
@@ -64,14 +66,34 @@ namespace Nycthemeron.API.Controllers
 
             string token = CreateToken(user);
 
-            return Ok(new
+            return Ok(new LoginResponseDto
             {
                 Token = token,
                 User = new UserDto
                 {
                     Id = user.Id,
                     UserName = user.UserName,
-                    Admin = user.Admin
+                    Admin = user.Admin,
+                     Characters = user.Characters.Select(c => new CharacterSheetDto
+                     {
+                         Id = c.Id,
+                         Name = c.Name,
+                         Age = c.Age,
+                         Race = c.Race,
+                         Sex = c.Sex,
+                         MaxHitpoints = c.MaxHitpoints,
+                         CurrentHitpoints = c.CurrentHitpoints,
+                         TempHitpoints = c.TempHitpoints,
+                         BaseArmor = c.BaseArmor,
+                         CurrentArmor = c.CurrentArmor,
+                         MagicalArmor = c.MagicalArmor,
+                         BaseSpirit = c.BaseSpirit,
+                         CurrentSpirit = c.CurrentSpirit,
+                         Initiative = c.Initiative,
+                         Movement = c.Movement,
+
+                         // ...whatever you want to include
+                     }).ToList()
                 }
             });
         }
