@@ -13,8 +13,11 @@ public class GameDbContext : DbContext
 
     public DbSet<Talent> Talents { get; set; }
     public DbSet<TalentType> TalentTypes { get; set; }
+    public DbSet<RacialTrait> RacialTraits { get; set; }
     public DbSet<Requirement> Requirements { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<Group> Groups { get; set; }
+    public DbSet<UserGroup> UserGroups { get; set; }
     public DbSet<CharacterSheet> CharacterSheets { get; set; }
     public DbSet<CharacterAttribute> Attributes { get; set; }
     public DbSet<Inventory> Inventories { get; set; }
@@ -24,6 +27,8 @@ public class GameDbContext : DbContext
     public DbSet<Other> Others { get; set; }
     public DbSet<Container> Containers { get; set; }
     public DbSet<Accessory> Accessories { get; set; }
+    public DbSet<Race> Races { get; set; }
+    public DbSet<UniqueTrait> UniqueTraits { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -44,6 +49,25 @@ public class GameDbContext : DbContext
             .WithOne(c => c.User)
             .HasForeignKey(c => c.UserId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        // Groups
+        modelBuilder.Entity<UserGroup>()
+        .HasKey(ug => new { ug.UserId, ug.GroupId });
+
+            modelBuilder.Entity<UserGroup>()
+                .HasOne(ug => ug.User)
+                .WithMany(u => u.UserGroups)
+                .HasForeignKey(ug => ug.UserId);
+
+            modelBuilder.Entity<UserGroup>()
+                .HasOne(ug => ug.Group)
+                .WithMany(g => g.UserGroups)
+                .HasForeignKey(ug => ug.GroupId);
+
+            modelBuilder.Entity<Group>()
+                .HasOne(g => g.GameMaster)
+                .WithMany(u => u.ManagedGroups)
+                .HasForeignKey(g => g.GameMasterId);
 
         // CharacterSheet
         modelBuilder.Entity<CharacterSheet>()
@@ -83,6 +107,26 @@ public class GameDbContext : DbContext
         // Attribute
         modelBuilder.Entity<CharacterAttribute>()
             .HasKey(a => a.Id);
+
+        //Race
+        modelBuilder.Entity<Race>()
+            .HasMany(r => r.UniqueTraits)
+            .WithOne(ut => ut.Race)
+            .HasForeignKey(ut => ut.RaceId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Race>()
+            .HasMany(r => r.PositiveRacialTraits)
+            .WithMany()
+            .UsingEntity(j => j.ToTable("RacePositiveTraits"));
+
+        modelBuilder.Entity<Race>()
+            .HasMany(r => r.NegativeRacialTraits)
+            .WithMany()
+            .UsingEntity(j => j.ToTable("RaceNegativeTraits"));
+
+        //RacialTraits
+        modelBuilder.Entity<RacialTrait>().ToTable("RacialTraits");
 
         // Talents
         modelBuilder.Entity<Talent>().ToTable("Talent");

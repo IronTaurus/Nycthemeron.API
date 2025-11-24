@@ -91,8 +91,6 @@ namespace Nycthemeron.API.Controllers
                          CurrentSpirit = c.CurrentSpirit,
                          Initiative = c.Initiative,
                          Movement = c.Movement,
-
-                         // ...whatever you want to include
                      }).ToList()
                 }
             });

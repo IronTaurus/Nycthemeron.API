@@ -41,6 +41,8 @@ namespace Nycthemeron.API.Models
         public Inventory Inventory { get; set; } = new();
         public List<Talent> Talents { get; set; } = new();
         public List<Card> Cards { get; set; } = new();
+        public int GroupId { get; set; }
+        public Group Group { get; set; } = null!;
 
     }
 }

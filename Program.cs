@@ -7,7 +7,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<GameDbContext>(options =>
-    options.UseSqlite("Data Source=Talents.db"));
+    options.UseSqlite("Data Source=Nycthemeron.db"));
 
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
@@ -39,7 +39,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<GameDbContext>();
-    // DbInitializer.Initialize(db);
+    DbInitializer.Initialize(db);
 }
 
 app.UseCors();

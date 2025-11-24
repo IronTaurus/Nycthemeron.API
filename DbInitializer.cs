@@ -12,23 +12,10 @@ public static class DbInitializer
         context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
 
-        var agility = new GetTalents().Agility();
-        var body = new GetTalents().Body();
-        var mind = new GetTalents().Mind();
-        var mystic = new GetTalents().Mystic();
-        var presence = new GetTalents().Presence();
-        var multi = new GetTalents().Multi();
-        var basic = new GetTalents().Basic();
+        var getTalents = new GetTalents();
+        var talents = getTalents.GetMany();
 
-        var talents =
-        agility
-        .Concat(body)
-        .Concat(mind)
-        .Concat(mystic)
-        .Concat(presence)
-        .Concat(multi)
-        .Concat(basic)
-        .ToList();
+        var races = new GetRace().Races();
 
         var melee = new GetWeapons().Melee();
         var ranged = new GetWeapons().Ranged();
@@ -52,14 +39,33 @@ public static class DbInitializer
                 PasswordSalt = passwordSalt,
                 Admin = false
             };
-
             context.Users.Add(testUser);
+            context.SaveChanges(); // <- ensures testUser.Id is set
+
+            // 2️⃣ Create the group without GameMasterId
+            var defaultGroup = new Group
+            {
+                Name = "Test Group",
+                GameMasterId = null
+            };
+            context.Groups.Add(defaultGroup);
+            context.SaveChanges(); // <- ensures defaultGroup.Id is set
+
+            // 3️⃣ Create the linking entity
+            var userGroup = new UserGroup
+            {
+                UserId = testUser.Id,
+                GroupId = defaultGroup.Id,
+                IsGameMaster = false
+            };
+            context.UserGroups.Add(userGroup);
             context.SaveChanges();
         }
 
 
         context.Talents.AddRange(talents);
         context.Items.AddRange(globalWeapons);
+        context.Races.AddRange(races);
         context.SaveChanges();
     }
     

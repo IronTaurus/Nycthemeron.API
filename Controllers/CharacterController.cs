@@ -10,7 +10,7 @@ using System.Security.Claims;
 namespace Nycthemeron.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [Authorize]
     public class CharactersController : ControllerBase
     {
