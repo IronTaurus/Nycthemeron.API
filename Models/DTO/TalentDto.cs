@@ -25,6 +25,7 @@ public class RequirementDto
 public class TalentCreateDto
 {
     public string? Title { get; set; } = null!;
+    public string? Key { get; set; }
     public string? Description { get; set; }
     public int Cost { get; set; }
     public List<TalentTypeDto> TalentTypes { get; set; } = new();

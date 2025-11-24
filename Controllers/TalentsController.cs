@@ -38,6 +38,7 @@ public class TalentsController : ControllerBase
                 {
                     Id = t.Id,
                     Title = t.Title,
+                    Key = t.Key,
                     Description = t.Description,
                     Cost = t.Cost,
                     TalentTypes = t.TalentTypes
