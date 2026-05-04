@@ -44,14 +44,43 @@ public class RaceController : ControllerBase
                     Behaviour = r.Behaviour,
 
                     UniqueTraits = r.UniqueTraits
-                        .Select(u => new UniqueTraitDto {Id = u.Id, Title = u.Title, Description = u.Description})
+                        .Select(u => new UniqueTraitDto { Id = u.Id, Title = u.Title, Description = u.Description })
                         .ToList(),
                     PositiveRacialTraits = r.PositiveRacialTraits
-                        .Select(r => new RacialTraitDto {Id = r.Id, Title = r.Title, Description = r.Description})
+                        .Select(r => new RacialTraitDto { Id = r.Id, Title = r.Title, Description = r.Description })
                         .ToList(),
                     NegativeRacialTraits = r.NegativeRacialTraits
                         .Select(r => new RacialTraitDto { Id = r.Id, Title = r.Title, Description = r.Description })
+                        .ToList(),
+                    Attributes = r.Attributes
+                        .Select(a => new CharacterAttributeDto { Title = a.Title, Value = a.Value, Aspiration = a.Aspiration })
+                        .ToList(),
+                    ChooseableTalents = r.ChooseableTalents
+                .Select(a => new TalentDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Key = a.Key,
+                    Description = a.Description,
+                    Cost = a.Cost,
+
+                    Requirements = a.Requirements
+                        .Select(req => new RequirementDto
+                        {
+                            Attribute = req.Attribute,
+                            Value = req.Value
+                        })
+                        .ToList(),
+
+                    TalentTypes = a.TalentTypes
+                        .Select(tt => new TalentTypeDto
+                        {
+                            Name = tt.Name
+                        })
                         .ToList()
+                })
+                .ToList()
+
                 })
                 .ToListAsync();
             Console.WriteLine($"Fetched {races.Count} races");

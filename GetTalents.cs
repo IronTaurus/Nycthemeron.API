@@ -109,7 +109,7 @@ public class GetTalents
             },
             new Talent // Light-footed I
             {
-                Title = "Light-footed I",
+                Title = "Light Footed I",
                 Key = "light_footed_1",
                 TalentTypes = new List<TalentType>
                 {
@@ -128,7 +128,7 @@ public class GetTalents
             },
             new Talent // Light-footed II
             {
-                Title = "Light-footed II",
+                Title = "Light Footed II",
                 Key = "light_footed_2",
                 TalentTypes = new List<TalentType>
                 {
@@ -143,7 +143,7 @@ public class GetTalents
             },
             new Talent // Light-footed III
             {
-                Title = "Light-footed III",
+                Title = "Light Footed III",
                 Key = "light_footed_3",
                 TalentTypes = new List<TalentType>
                 {
@@ -1844,8 +1844,9 @@ public class GetTalents
 
     public List<Talent> GetMany(params string[] keys)
     {
-        return allTalents
-            .Where(t => keys.Contains(t.Key))
-            .ToList();
+        if (keys == null || keys.Length == 0)
+            return allTalents;
+
+        return allTalents.Where(t => keys.Contains(t.Key)).ToList();
     }
 }

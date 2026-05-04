@@ -240,6 +240,13 @@ public class GetRacialTraits
                 Type = "Negative",
                 Description = "Your movement is reduced by 1.",
             },
+            new RacialTrait //Social Disliked
+            {
+                Title = "Social Disliked",
+                Key = "social_disliked",
+                Type = "Negative",
+                Description = @"People have a tendency to dislike you.",
+            },
             new RacialTrait //Weak Mind I
             {
                 Title = "Weak Mind I",

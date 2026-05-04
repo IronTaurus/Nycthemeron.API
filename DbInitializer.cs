@@ -8,7 +8,10 @@ public static class DbInitializer
 {
     public static void Initialize(GameDbContext context)
     {
-        // WARNING: This deletes everything in the database
+        if (context.Database.EnsureCreated())
+        {
+            // database was just created → seed
+        }
         context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
 
