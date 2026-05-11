@@ -37,7 +37,24 @@ public class GetRacialTraits
                 Title = "Creature of the night",
                 Key = "night_creature",
                 Types = new List<string> {"Positive"},
-                Description = @"Use the 'Creature of the Night' Action Deck instead of the normal one. 
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "DVision",
+                        Value = 1,
+                        Condition = "None",
+                        Description = "+1 to dark vision."
+                    },
+                    new Modifier
+                    {
+                        Type = "Action Deck",
+                        Value = 0,
+                        Condition = "Night",
+                        Description = "Use the 'Creature of the Night' Action Deck."
+                    }
+                },
+                Description = @"You have +1 to dark vision. Use the 'Creature of the Night' Action Deck instead of the normal one. 
                 (The deck features 9 Sun cards, 13 Moon cards, one Critical Fail and one Critical Success)",
             },
             new RacialTrait //Creature of the Day
@@ -45,7 +62,24 @@ public class GetRacialTraits
                 Title = "Creature of the Day",
                 Key = "day_creature",
                 Types = new List<string> {"Positive"},
-                Description = @"Use the 'Creature of the Day' Action Deck instead of the normal one. 
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "LVision",
+                        Value = 1,
+                        Condition = "None",
+                        Description = "+1 to light vision."
+                    },
+                    new Modifier
+                    {
+                        Type = "Action Deck",
+                        Value = 0,
+                        Condition = "Day",
+                        Description = "Use the 'Creature of the Day' Action Deck."
+                    }
+                },
+                Description = @"You have +1 to light vision. Use the 'Creature of the Day' Action Deck instead of the normal one. 
                 (The deck features 11 Sun cards, 9 Moon cards, one Critical Fail and one Critical Success)",
             },
             new RacialTrait //Mountainborn
@@ -53,6 +87,16 @@ public class GetRacialTraits
                 Title = "Mountainborn",
                 Key = "mountainborn",
                 Types = new List<string> {"Positive"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "Climb",
+                        Value = 1,
+                        Condition = "None",
+                        Description = "+1 to Climbing checks."
+                    }
+                },
                 Description = @"You have +1 to Climbing checks.",
             },
             new RacialTrait //Dwarven Knowledge
@@ -60,6 +104,23 @@ public class GetRacialTraits
                 Title = "Dwarven Knowledge",
                 Key = "dwarven_knowledge",
                 Types = new List<string> {"Positive"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "Knowledge: History",
+                        Value = 1,
+                        Condition = "Dwarven Culture",
+                        Description = "+1 to Knowledge: History checks."
+                    },
+                    new Modifier
+                    {
+                        Type = "Knowledge: Culture",
+                        Value = 1,
+                        Condition = "Dwarven Culture",
+                        Description = "+1 to Knowledge: Culture checks."
+                    }
+                },
                 Description = "+1 to Knowledge: History and Knowledge: Culture checks involving Dwarves.",
             },
             new RacialTrait //Dark Vision I
@@ -67,6 +128,16 @@ public class GetRacialTraits
                 Title = "Dark Vision I",
                 Key = "dark_vision_1",
                 Types = new List<string> {"Positive"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "DVision",
+                        Value = 1,
+                        Condition = "None",
+                        Description = "+1 to Dark Vision.",
+                    }
+                },
                 Description = "You have +1 to Dark Vision.",
             },
             new RacialTrait //Dark Vision II
@@ -74,6 +145,16 @@ public class GetRacialTraits
                 Title = "Dark Vision II",
                 Key = "dark_vision_2",
                 Types = new List<string> {"Positive"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "DVision",
+                        Value = 1,
+                        Condition = "None",
+                        Description = "+2 to Dark Vision.",
+                    }
+                },
                 Description = "You have +2 to Dark Vision.",
             },
             new RacialTrait //Dark Senses
@@ -81,6 +162,16 @@ public class GetRacialTraits
                 Title = "Dark Senses",
                 Key = "dark_senses",
                 Types = new List<string> {"Positive"},
+                    Modifiers = new List<Modifier>
+                    {
+                        new Modifier
+                        {
+                            Type = "Perception",
+                            Value = 3,
+                            Condition = "Scent",
+                            Description = "+3 to Perception checks.",
+                        }
+                    },
                 Description = "You gain +3 to Perception checks made using only your sense of smell.",
             },
             new RacialTrait //Elvish Knowledge
@@ -88,6 +179,23 @@ public class GetRacialTraits
                 Title = "Elvish Knowledge",
                 Key = "elvish_knowledge",
                 Types = new List<string> {"Positive"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "Knowledge: History",
+                        Value = 1,
+                        Condition = "Elven Culture",
+                        Description = "+1 to Knowledge: History checks."
+                    },
+                    new Modifier
+                    {
+                        Type = "Knowledge: Culture",
+                        Value = 1,
+                        Condition = "Elven Culture",
+                        Description = "+1 to Knowledge: Culture checks."
+                    }
+                },
                 Description = "+1 to Knowledge: History and Knowledge: Culture checks involving Elves.",
             },
             new RacialTrait //Hardened Skin I
@@ -95,6 +203,16 @@ public class GetRacialTraits
                 Title = "Hardened Skin I",
                 Key = "hardened_skin_1",
                 Types = new List<string> {"Positive"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "HP",
+                        Condition = "None",
+                        Value = 5,
+                        Description = "+5 Max Hitpoints.",
+                    }
+                },
                 Description = "You have an 5 additional Max Hitpoints.",
             },
             new RacialTrait //Hardened Skin II
@@ -102,6 +220,16 @@ public class GetRacialTraits
                 Title = "Hardened Skin II",
                 Key = "hardened_skin_2",
                 Types = new List<string> {"Positive"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "HP",
+                        Condition = "None",
+                        Value = 10,
+                        Description = "+10 Max Hitpoints.",
+                    }
+                },
                 Description = "You have an 10 additional Max Hitpoints.",
             },
             new RacialTrait //Iron Stomach
@@ -109,6 +237,16 @@ public class GetRacialTraits
                 Title = "Hardened Gullet",
                 Key = "Iron_gullet",
                 Types = new List<string> {"Positive"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "Resistance: Poison",
+                        Condition = "None",
+                        Value = 1,
+                        Description = "+1 to checks against minor poisoning inflictions.",
+                    }
+                },
                 Description = @"You have +1 to checks against minor poisoning inflictions. (Minor poisoning includes: Sedative, Alcohol, Food poisoning, etc) ]",
             },
             new RacialTrait //Light Vision I
@@ -116,6 +254,16 @@ public class GetRacialTraits
                 Title = "Light Vision I",
                 Key = "light_vision_1",
                 Types = new List<string> {"Positive"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "LVision",
+                        Condition = "None",
+                        Value = 1,
+                        Description = "+1 to Light Vision.",
+                    }
+                },
                 Description = "You have +1 to Light Vision.",
             },
             new RacialTrait //Light Vision II
@@ -123,6 +271,16 @@ public class GetRacialTraits
                 Title = "Light Vision II",
                 Key = "light_vision_2",
                 Types = new List<string> {"Positive"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "LVision",
+                        Condition = "None",
+                        Value = 2,
+                        Description = "+2 to Light Vision.",
+                    }
+                },
                 Description = "You have +2 to Light Vision.",
             },
             new RacialTrait //Meditative Memory
@@ -137,13 +295,33 @@ public class GetRacialTraits
                 Title = "Orcish Strength I",
                 Key = "orcish_strength_1",
                 Types = new List<string> {"Positive"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "Strength",
+                        Value = 1,
+                        Condition = "None",
+                        Description = "+1 to Strength checks.",
+                    }
+                },
                 Description = @"You have +1 to Strength checks.",
             },
-                new RacialTrait //Orcish Strength II
+            new RacialTrait //Orcish Strength II
             {
                 Title = "Orcish Strength II",
                 Key = "orcish_strength_2",
                 Types = new List<string> {"Positive"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "Strength",
+                        Value = 2,
+                        Condition = "None",
+                        Description = "+2 to Strength checks.",
+                    }
+                },
                 Description = @"You have +2 to Strength checks.",
             },
             new RacialTrait //Orcish Knowledge
@@ -151,6 +329,23 @@ public class GetRacialTraits
                 Title = "Orcish Knowledge",
                 Key = "orcish_knowledge",
                 Types = new List<string> {"Positive"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "Knowledge: History",
+                        Value = 1,
+                        Condition = "Orcish Culture",
+                        Description = "+1 to Knowledge: History checks."
+                    },
+                    new Modifier
+                    {
+                        Type = "Knowledge: Culture",
+                        Value = 1,
+                        Condition = "Orcish Culture",
+                        Description = "+1 to Knowledge: Culture checks."
+                    }
+                },
                 Description = "+1 to Knowledge: History and Knowledge: Culture checks involving Orcs.",
             },
             new RacialTrait //Shared Ancestry
@@ -189,6 +384,16 @@ public class GetRacialTraits
                 Title = "Poor Light Vision I",
                 Key = "poor_light_vision_1",
                 Types = new List<string> {"Negative"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "LVision",
+                        Condition = "None",
+                        Value = -1,
+                        Description = "-1 to Light Vision.",
+                    }
+                },
                 Description = "You have -1 to Light Vision.",
             },
             new RacialTrait //Poor Light Vision II
@@ -196,6 +401,16 @@ public class GetRacialTraits
                 Title = "Poor Light Vision II",
                 Key = "poor_light_vision_2",
                 Types = new List<string> {"Negative"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "LVision",
+                        Condition = "None",
+                        Value = -2,
+                        Description = "-2 to Light Vision."
+                    }
+                },
                 Description = "You have -2 to Light Vision.",
             },
             new RacialTrait //Poor Night Vision I
@@ -203,6 +418,16 @@ public class GetRacialTraits
                 Title = "Poor Dark Vision I",
                 Key = "poor_dark_vision_1",
                 Types = new List<string> {"Negative"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "DVision",
+                        Condition = "None",
+                        Value = -1,
+                        Description = "-1 to Dark Vision."
+                    }
+                },
                 Description = "You have -1 to Dark Vision.",
             },
             new RacialTrait //Poor Night Vision II
@@ -210,6 +435,16 @@ public class GetRacialTraits
                 Title = "Poor Dark Vision II",
                 Key = "poor_dark_vision_2",
                 Types = new List<string> {"Negative"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "DVision",
+                        Condition = "None",
+                        Value = -2,
+                        Description = "-2 to Dark Vision."
+                    }
+                },
                 Description = "You have -2 to Dark Vision.",
             },
             new RacialTrait //Picky Sleeper
@@ -238,6 +473,16 @@ public class GetRacialTraits
                 Title = "Short Legs",
                 Key = "short_legs",
                 Types = new List<string> {"Negative"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "Movement",
+                        Condition = "None",
+                        Value = -1,
+                        Description = "-1 to Movement."
+                    }
+                },
                 Description = "Your movement is reduced by 1.",
             },
             new RacialTrait //Social Disliked
@@ -252,6 +497,16 @@ public class GetRacialTraits
                 Title = "Weak Mind I",
                 Key = "weak_mind_1",
                 Types = new List<string> {"Negative"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "Mind Infliction",
+                        Condition = "None",
+                        Value = -1,
+                        Description = "-1 to Mind Infliction checks."
+                    }
+                },
                 Description = "You have -1 to Mind Infliction checks.",
             },
             new RacialTrait //Weak Mind II
@@ -259,6 +514,16 @@ public class GetRacialTraits
                 Title = "Weak Mind II",
                 Key = "weak_mind_2",
                 Types = new List<string> {"Negative"},
+                Modifiers = new List<Modifier>
+                {
+                    new Modifier
+                    {
+                        Type = "Mind Infliction",
+                        Condition = "None",
+                        Value = -2,
+                        Description = "-2 to Mind Infliction checks."
+                    }
+                },
                 Description = "You have -2 to Mind Infliction checks.",
             },
         };

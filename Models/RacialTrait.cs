@@ -7,5 +7,6 @@ public class RacialTrait
     public string Title { get; set; } = null!;
     public string? Description { get; set; }
     public List<string>? Types { get; set; }
+    public List<Modifier>? Modifiers { get; set; }
     public List<CharacterSheet> Characters { get; set; } = new(); // many-to-many
 }
